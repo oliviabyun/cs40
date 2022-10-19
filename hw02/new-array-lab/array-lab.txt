@@ -1,0 +1,130 @@
+           CS 40 Lab: Unboxed and 2D Arrays
+
+
++--------------------------------------------------------+
+|Keeper of the record: Olivia Byun (obyun01)             |
+|--------------------------------------------------------|
+| Other group member(s): Jiyoon Choi (jchoi13)           |
+|                                                        |
+|                                                        |
+|                                                        |
++--------------------------------------------------------+
+
+
+PART 1: BOXED AND UNBOXED ARRAYS
+--------------------------------
+
+You are about to design the interface and implementation for a
+collection data type, i.e., an ADT like Hanson's, and you are
+considering the tradeoffs between using a boxed or an unboxed
+interface for values that users store in your collection.
+
+1A: Briefly define the terms "boxed" and "unboxed" as used for these
+    interfaces (i.e., help us be sure you know which is which!):
+
+Boxed arrays are a type of array that can dynamically manage memory because
+it behaves by containing a pointer in each index of one array, which each point
+to another element. Since the boxed array is structured using pointers, whatever
+happens to the size of the element that each pointer is pointing to does not
+impact the functionality of the container. When using boxed arrays, users must 
+manually manage memory (ex. freeing each pointer within the array in addition 
+to freeing the container itself).
+
+Unboxed arrays are a type of array that stores literal data (rather than 
+pointers to data). With this type of array, a user does not have to manually
+manage memory, but must specify the element size so the proper amount of memory
+can be allocated.
+
+
+1B: List two (or more) advantages of the boxed representation.
+1) Dynamically manages memory via pointers to data
+2) Simple interface
+
+
+1C: List two (or more) advantages of an unboxed representation.
+1) Users do not have to worry about memory management
+2) Pointees are a part of the container itself
+
+
+
+1D: Look at the interface to UArray (a link to an interface
+    summary is at the start of the lab instructions). Discuss the 
+    methods that show the use of the unboxed style. Why, for example, 
+    does UArray_new take both a number of elements and an element size? 
+
+    The methods that UArray use are new, free, length, size, at, resize,
+    and copy. The function UArray_new takes both a number of elements 
+    and an element size because the length represents the number of 
+    elements of the container, whereas the size represents the number
+    of bytes allocated in each index of that container.
+
+
+
+
+
+PART 2: 2D Arrays from 1D Arrays
+--------------------------------
+
+2A. One way to construct a 2D array is to use multiple 1D
+    arrays. Describe briefly how you would do this. For example, if
+    the user asked you to create a 5x7 array of values, how many
+    one-dimensional arrays would you create? If the user asked to
+    store a value in cell [3,6] where would it go?
+
+    If the user asked us to create a 5x7 array of values, we would first create
+    one array of length 5, where each index in that array would contain another
+    array. So, overall we would have 6 arrays.
+
+    If the user asked to store a value in [3,6], we would index to the 
+    third element of the container array, then index to the sixth element
+    of the array at the third index.
+
+
+
+2B. Another approach is to use a single one-dimensional array and to
+    put all the elements of the 2D array into that. Again, assuming
+    that you are to create a 7x5 2D array, give a mathematical formula
+    for the index in the 2D array where a value [x,y] would go in the
+    1D array.
+    
+    Assume that:
+    - index is the index of the 1D array we are trying to get to
+    - col is the target column of the 2D array (that we're trying to access)
+    - row is the target row of the 2D array (that we're trying to access)
+    - num_colum is the length of each "row" (aka # of columns) of the 2D array
+
+    index = col + (row * num_columns)
+
+    Example: trying to get to array[3][2] in 1D array representation where 
+             our initial array has 5 columns and 6 rows.
+
+        index = 3 + (2 * 5) = 13
+
+        So, array[3][2] is represented as array[13] in a 1D representation.
+
+
+
+2C. (optional) is there another mapping that would work as well?
+
+
+
+PART 3: Designing the UArray2 Interface
+---------------------------------------
+
+3A. Describe three (or more) things you learned about the design and semantics
+    of the UArray2 interface from reading useuarray2.c and from running
+    correct_useuarray2.
+
+    1) Being able to pass in a function as an argument to another function
+
+    2) That mapping functions apply the function passed in to every single
+        element of the UArray
+
+    3) We can use a marker to determine if values in an array are correct
+
+
+
+
+
+
+

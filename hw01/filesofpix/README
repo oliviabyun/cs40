@@ -1,0 +1,30 @@
+/******************************************************************************
+* HW 1: filesofpix
+* Comp 40 Fall 2022 
+* README
+* Authors: Helena Lowe (hlowe01) and Olivia Byun (obyun01)
+* 9/20/2022
+******************************************************************************/
+
+Acknowledgments:
+---------------
+We received help from nearly all of the TAs (but special shoutout to Alan and
+Kresten for helping us resolve some of our biggest bugs and finally getting
+our images to display correctly)!
+
+Implementation:
+--------------
+We have correctly implemented (to the best of our knowledge) readaline, 
+including for lines over 1000 characters, separating digit from nondigit 
+characters in a line, converting the original pixels to raw formatted 
+characters, adding original pixels to a char array, and printing out the 
+uncorrupted raw pgm to stdout.
+
+Out of all of the given corrupted images, our program works for all but the 
+turing image. We think this is due to an edge case related to null terminating
+characters.
+
+Time:
+----
+We spent around 55 hours on this assignment.
+
