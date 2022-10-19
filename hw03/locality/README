@@ -1,0 +1,132 @@
+README
+
+Alyssa Williams (awilli36)
+Olivia Byun (obyun01)
+
+-------------------------------------------------------------------------------
+Acknowledgements: 
+Thank you to all the amazing TA's for helping us! 
+Tina Ma
+Elliot Bonner
+Asli Kocak
+Matt Zhou
+Kenny Lin
+Christopher Sasanuma
+Ilona Lahdesmaki
+Randy Dang
+Bridget Gattinoni
+MJ Sidhom
+-------------------------------------------------------------------------------
+
+Implementation: 
+We have successfully implemented all commands, including those for extra credit
+(rotate 270, flip horizontal, flip vertical, transpose).
+
+-------------------------------------------------------------------------------
+
+Architecture:
+
+UArray2b:
+UArray2b is a UArray2 of UArrays. The UArray2 stores the blocks as elements, 
+and each block stores a UArray of elements. 
+
+A2Methods:
+A2Methods is used to create polymorphism with UArray2 and UArray2b, as they 
+have a lot of the same functions. Each of UArray2 and UArray2b implement 
+A2Methods, so we can create an A2Methods that has either a UArray2 or a 
+UArray2b depending on what the user specified. 
+
+ppmtrans:
+ppmtrans uses Pnm_ppm instances to deal with reading, writing, and handling
+image files. These instances contain an A2Methods 2D array.
+
+-------------------------------------------------------------------------------
+
+Measurements and Results for Part E: 
+
+Test file: mobo.jpg
+Rotation: 90, Mapping: row-major, Dimensions: 6120x8160 
+Rotate time: 3265920519.000000 nanoseconds
+Rotate time per pixel: 65.397934 nanoseconds
+
+Rotation: 180, Mapping: row-major, Dimensions: 8160x6120
+Rotate time: 2348891855.000000 nanoseconds
+Rotate time per pixel: 47.035032 nanoseconds
+
+Rotation: 90, Mapping: column-major, Dimensions: 6120x8160
+Rotate time: 4124433709.000000 nanoseconds
+Rotate time per pixel: 82.589103 nanoseconds
+
+Rotation: 180, Mapping: column-major, Dimensions: 8160x6120
+Rotate time: 5520351832.000000 nanoseconds
+Rotate time per pixel: 110.541455 nanoseconds
+
+Rotation: 90, Mapping: block-major, Dimensions: 6120x8160
+Rotate time: 3671634326.000000 nanoseconds
+Rotate time per pixel: 73.522089 nanoseconds
+
+Rotation: 180, Mapping: block-major, Dimensions: 8160x6120
+Rotate time: 3781120666.000000 nanoseconds
+Rotate time per pixel: 75.714482 nanoseconds
+
+***
+
+Results ranked from fastest to slowest:
+1. Row-major 180 (47.0 nanoseconds per pixel)
+2. Row-major 90 (65.4 nanoseconds per pixel)
+3. Block-major 90 (73.5 nanoseconds per pixel)
+4. Block-major 180 (75.7 nanoseconds per pixel)
+5. Column-major 90 (82.6 nanoseconds per pixel)
+6. Column-major 180 (110.5 nanoseconds per pixel)
+
+***
+
+Computer Info
+(Halligan lab computer)
+Name and CPU Type: Intel(R) Core(TM) i7-10700T CPU @ 2.00GHz
+Model: 165
+Clock rate: 2000.072 MHz
+
+***
+
+Explanation:
+
+UArray2 is implemented by storing rows, so row-major 180 degrees is the fastest
+because each row can be stored in the cache as the program is reading. Because
+the rotation is 180 degrees, the writes are also by row, so row-major 180 
+degrees is fast for both the reads and writes. 
+
+This is also the reason why column-major 180 degrees is the slowest. Because 
+UArray2 stores rows, the cache will store each row, but each read is from a 
+different row in column-major order, so there will be many cache misses. 
+Because the rotation is 180 degrees, so writes are also by column, so column-
+major 180 degrees is slow for both the reads and writes =. 
+
+The row-major 90 degrees is faster than the column-major 90 degrees because in
+the implementation of UArray2, column-major access calls the row() function
+for every single element, whereas row-major access calls the row() function
+only once per row. Although both row-major and column-major access each element
+in the array once, the extra function calls in column-major result in it being
+slower than row-major.
+
+We would expect block-major to be a similar, but slightly slower speed than 
+row-major, since our representation of a blocked array is similar to UArray2, 
+but requires an extra layer of access through UArray2b to get to each element.
+Block-major 180 is similar speed (pretty much identical) to 90 degrees because 
+blocks are stored in the cache for both reads and writes for both 80 and 90 
+degrees, so it is fairly quick for both. 
+
+-------------------------------------------------------------------------------
+
+Time: 
+We spent approximately 23 hours on this assignment.
+
+Tues 10/4: 3.5 hours
+Wed 10/5: 2.5 hours
+Thurs 10/6: 3.5 hours
+Sat 10/8: 2.5 hours
+Sun 10/9: 3 hours
+Mon 10/10: 3 hours
+Tues 10/11: 2 hours
+Thurs 10/13: 3 hours
+Total: 23 hours

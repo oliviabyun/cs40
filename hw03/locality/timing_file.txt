@@ -1,0 +1,24 @@
+Test file: mobo.jpg
+Rotation: 90, Mapping: row-major, Dimensions: 6120x8160 
+Rotate time: 3265920519.000000 nanoseconds
+Rotate time per pixel: 65.397934 nanoseconds
+
+Rotation: 180, Mapping: row-major, Dimensions: 8160x6120
+Rotate time: 2348891855.000000 nanoseconds
+Rotate time per pixel: 47.035032 nanoseconds
+
+Rotation: 90, Mapping: column-major, Dimensions: 6120x8160
+Rotate time: 4124433709.000000 nanoseconds
+Rotate time per pixel: 82.589103 nanoseconds
+
+Rotation: 180, Mapping: column-major, Dimensions: 8160x6120
+Rotate time: 5520351832.000000 nanoseconds
+Rotate time per pixel: 110.541455 nanoseconds
+
+Rotation: 90, Mapping: block-major, Dimensions: 6120x8160
+Rotate time: 3671634326.000000 nanoseconds
+Rotate time per pixel: 73.522089 nanoseconds
+
+Rotation: 180, Mapping: block-major, Dimensions: 8160x6120
+Rotate time: 3781120666.000000 nanoseconds
+Rotate time per pixel: 75.714482 nanoseconds
