@@ -1,0 +1,65 @@
+/**********************************************************
+* Homework 4: arith
+* CS 40
+* README
+* Helena Lowe (hlowe01) & Olivia Byun (obyun01)
+* 10/26/22
+*********************************************************/
+
+Acknowledgements:
+----------------
+Thank you to all the TA's for helping us: Rohun Nanda, Zane Ice, Tina Ma, Alan
+Luc, Alec Xu, Neil Powers, Adam Rubinstein, Matt Zhou, Trevor Sullivan, Asli,
+Cece Crumlish (and any others we may have missed)!
+
+
+Architecture:
+------------
+We have two main modules, compress and decompress, both of which call the 3 
+compression/decompression modules:
+1. ppm_rgb which handles everything in rgb colorspace -- it can convert
+        2D pixel arrays to and from integer representation and floating point 
+        representation. It also handles trimming of the image, reading a
+        given image that is to be compressed, and printing a decompressed image
+        to standard output.
+2. transform which handles converting pixel arrays from rgb color space to 
+        component video color space. It also handles discrete cosine 
+        transformations and quantization. The opposites of these compression 
+        functions are handled here as well: a user can calculate chroma codes, 
+        inverse discrete cosine, and convert back from component video color
+        space to rgb color space.
+3. codewords which handles converting from quantized pixel values to 32-bit
+        codewords and vice versa. This uses our bitpack implementation to pack 
+        and unpack the codewords.
+
+
+Implementation:
+--------------
+To the best of our knowledge, we have implemented everything correctly. We have
+tested the compression and decompression of images on many test images. 
+Additionally, we have tested our bitpack implementation extensively with edge
+cases such as very large numbers and widths of 0.
+
+Time:
+----
+We spent approximately 13 hours analyzing the problems in the assignment.
+We spent approximately 29 hours solving the problems after our analysis.
+In total, we spent approximately 42 hours working on this assignment.
+
+Total (so far): 42 hours
+Analyzing total: 13 hours
+Solving total: 29 hours
+
+Fri 10/14: 1.5 hours (analyzing)
+Sat 10/15: 4.5 hours (analyzing)
+Sun 10/16: 3 hours (analyzing)
+Mon 10/17: 1 hour (analyzing)
+Tues 10/18: 3 hours (analyzing)
+Wed 10/19: 3 hours (solving)
+Thurs 10/20: 5 hours (solving)
+Fri 10/21: 1.5 hours (solving)
+Sat 10/22: 5 hours (solving)
+Sun 10/23: 3 hours (solving)
+Mon 10/24: 4.5 hours (solving)
+Tues 10/25: 4 hours (solving)
+Wed 10/26: 3 hours (solving)
