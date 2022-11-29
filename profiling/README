@@ -1,0 +1,19 @@
+README
+
+TAs:
+Tina Ma
+
+Hours spent:
+11/28: 0.5 hours 
+
+Instructions
+valgrind --tool=callgrind --dump-instr=yes
+
+
+
+Questions
+Why did we fail the autograder tests? (especially advent)
+- EOF stdout
+
+How do we check that our program still works after we make changes?
+Will you be running all the tests from UM or just things like midmark?
