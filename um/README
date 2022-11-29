@@ -1,0 +1,193 @@
+ACKNOWLEDGEMENTS
+TAs:
+Ilona
+Matt (thanks for adding me on linkedin) <-- alyssa wrote this 
+Kresten (sorry for not adding you kresten)
+Neil
+Alan
+Adam (for putting down what we could pick up)
+Cecelia (TEEHEE)
+Asli
+Alec (thanks for helping us understand the spec)
+Randy 
+
+Thank Mark Sheldon for answering our Piazza post
+
+--------------------------------------------------------------------------------
+
+IMPLEMENTATION:
+
+We have implemented everything specified in the spec to the best of our ability.
+We sure hope everything has been correctly implemented. 
+
+--------------------------------------------------------------------------------
+
+DESIGN:
+
+We do not have any significant departures from our design. 
+
+--------------------------------------------------------------------------------
+
+ARCHITECTURE:
+Modules:
+We divided our modules into type of instruction. We have 4 modules: um, memory,
+calculate, and perform_io.
+
+um:
+The main module um sets up the data structures and program for running. It uses
+the other three modules to perform um operations. 
+
+memory:
+The memory module is the only module along with the main one that has access to
+segmented memory, which is represented by a Hanson sequence of Hanson UArrays.
+Some of the functions also have acces to the registers, which are represented 
+as a carray. As the name suggests, the memory module handles operations that 
+deal with memory. It is used by our um module.
+
+calculate: 
+The calculate module does the basic operations that only need the registers and
+/or relate to calculations. It does not have access to memory, but has access to
+the registers, which are represented by a carray. It is used by our um module.
+
+perform_io:
+The perform_io module performs um operations related to file I/O and has access
+to the registers. It is used by our um module.
+
+--------------------------------------------------------------------------------
+
+RUNNING 50 MILLION INSTRUCTIONS:
+
+We created a loop that ran 500,000 times and outputted a character every single 
+time (acting as a counter to verify that we ran our loop 500,000 times). Our 
+initial goal was to scale the time it took to run our loop by 100, since this
+would be 50 million instructions. However, since our loop had 7 instructions
+per iteration, we only had to multiply our total time taken by 100/7 to account
+for 50 million instructions. The whole test ran in 0.12 seconds, which takes 
+1.71 seconds after being scaled. This is well under our expected performance of 
+100 seconds.
+
+--------------------------------------------------------------------------------
+
+UM UNIT TESTS:
+
+add.um:
+Makes sure there are no major errors; simply calls the addition operator then
+halts.
+
+cmov-test.um:
+Tests the conditional move operator in two ways:
+- when given a register whose contents are zero, register b is loaded into 
+  register a. We output these values and makek sure a and b are equal.
+- when given a register whose contents are not zero, register b and register a
+  remain distinct. We output these values and confirm that they have not 
+  changed.
+
+divide-test.um:
+Tests the division operator by loading a value, its divisor, and calculating
+the dividend, testing against expected output.
+
+halt-verbose.um:
+Ensures halt works by calling the halt operator before outputting values. Test
+succeeds if no output prints out (since the halt operation is called before
+reaching these statements).
+
+halt.um:
+Ensures halt works by calling the halt operator. Program should stop and there
+should be no output.
+
+input-test.um:
+Ensures the input operator works by calling the input operator and outputting
+the value; the success of the test can be verified by diffing the character
+input from the output (which should be the same).
+
+load-test.um:
+Loads three values into three different registers and outputs all three. This 
+should output the same three values that were loaded and can be confirmed by
+diffing the output with the expected output (which should be 'dn[').
+
+loadp-test.um:
+Creates a program that loads several values and has two different output
+statements. Changes the program counter to skip an output statement. If ran
+correctly, it will output 'D' and nothing else. If ran incorrectly, it may also
+output a 'C'.
+
+loadp2-test.um
+Maps a segments, stores the halt instruction into that segment, then loads that
+segment into segment 0 using load program. If ran correctly, it will output 'D'
+and nothing else, then halt. If ran incorrectly, it will have multiple outputs 
+and never halt. 
+
+loadp3-test.um
+Maps a segment, stores 4 instructions into that segment (using math) and calls
+load program to load that segment into segment 0, setting the program counter 
+to where the instructions start in the segment. 
+
+loadstore-test.um
+Tests segmented store and segmented load by mapping a segment, storing a value 
+there, loading that value into a different register, and printing it out. 
+
+loadstore2-test.um
+Uses segmented store and segmented load to swap two lines that occur later on
+in the program (changing segment 0). 
+
+loop-test.um
+Contains a for loop that executes 500,000 times, printing out the letter 'D' 
+each time. Used for timing our UM. 
+
+map-segment-test.um
+Tests the map segment function by mapping two segments and making sure that 
+the segment identifier stored in the register is what we expected. 
+
+multiply-test.um
+Tests the multiply function by multiplying two numbers together and printing
+out the product. 
+
+nand-test.um
+Tests the nand function by performing the nand operation twice, and printing
+out the values of all three registers involved, which are all human-readable 
+ASCII characters. 
+
+print-six.um
+Adds two numbers together and outputs the sum, which should be the ASCII value 
+'6'. 
+
+unmap-segment-test.um:
+Tests the unmap segment function by mapping two segments, unmapping the first, 
+and finally mapping a new segment, making sure that the original segment id was
+reused. 
+
+cat.um:
+Uses the provided cat.um file; copies standard input to standard output. This
+tests that the input is the same as the output using a wide range of
+characters from /dev/random (anything between 0 and 255). Note: we tested this
+file since it was provided but did not actually include it in our .um tests
+that we submitted.
+
+--------------------------------------------------------------------------------
+
+TIME SPENT:
+
+11/10: 1.5 hours
+11/11: 1.5 hours 
+11/12: 1 hour
+11/13: 2.5 hours
+11/14: 2 hours
+11/15: 3 hours
+11/16: 1 hour
+11/17: 1.5 hours
+11/19: 3 hours (and we got absolutely nothing done. I love CS :D) 
+11/20: 3 hours 
+11/21: 3 hours
+Total time: 22 hours
+
+TIME SPENT ANALYZING: 
+1.5 hours 
+
+TIME SPENT PREPARING DESIGN: 
+5 hours
+
+TIME SPENT SOLVING PROBLEMS: 
+15.5 hours (but 12.5 if you don't count vscode corrupting our files)
+
+TIME SPENT ON VSCODE CORRUPTING OUR FILES:
+3 hours
